@@ -28,6 +28,7 @@ class ShellyCommunicator(object):
         self._subid = None # may be powermeter or relay id
         
         self._exit_after = exit_after
+        self._started = False
 
     def _reset(self):
         logging.debug("resetting this shelly")
@@ -38,7 +39,9 @@ class ShellyCommunicator(object):
             os._exit(0)
 
     def _do(self):
-        self._shelly.start()
+        if not self._started:
+            self._shelly.start()
+            self._started = True
         
     def _device_updated(self, device):
         text = 'update for device id: "{i}", device_type: "{t}", state: "{s}"'.format(i=device.id, t=device.device_type, s=device.state)
