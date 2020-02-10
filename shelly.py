@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyShelly import pyShelly
-from pyShelly.const import INFO_VALUE_CONSUMPTION
+from pyShelly.const import INFO_VALUE_CURRENT_CONSUMPTION
 
 from datetime import timedelta
 import time
@@ -73,7 +73,7 @@ class ShellyCommunicator(object):
                 elif device.device_type == "POWERMETER":        
                     if mr._method == "power_consumption":
                         if (mr._callback):
-                            mr._callback(device.sensor_values[INFO_VALUE_CONSUMPTION])
+                            mr._callback(device.sensor_values[INFO_VALUE_CURRENT_CONSUMPTION])
                         hit_mr = mr
         if hit_mr:
             self._method_requests.remove(hit_mr)
